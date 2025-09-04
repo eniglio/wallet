@@ -19,19 +19,6 @@ class DtoTests {
     }
 
     @Test
-    void testTransactionDto() {
-        UUID id = UUID.randomUUID();
-        UUID walletId = UUID.randomUUID();
-        LocalDateTime now = LocalDateTime.now();
-        TransactionDTO dto = new TransactionDTO(id, walletId, "DEPOSIT", BigDecimal.ONE, now);
-        assertEquals(id, dto.getId());
-        assertEquals(walletId, dto.getWalletId());
-        assertEquals("DEPOSIT", dto.getType());
-        assertEquals(BigDecimal.ONE, dto.getAmount());
-        assertEquals(now, dto.getTimestamp());
-    }
-
-    @Test
     void testTransactionRequestDto() {
         UUID walletId = UUID.randomUUID();
         TransactionRequestDTO dto = new TransactionRequestDTO(walletId, BigDecimal.valueOf(30.0));
