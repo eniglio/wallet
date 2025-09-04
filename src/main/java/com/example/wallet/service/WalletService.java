@@ -42,6 +42,27 @@ public class WalletService {
         wallet.setBalance(wallet.getBalance().subtract(amount));
         return walletRepository.save(wallet);
     }
+
+    public void transfer(UUID fromId, UUID toId, BigDecimal amount) {
+        if (fromId.equals(toId)) {
+            throw new IllegalArgumentException("Conta de origem e destino não podem ser iguais");
+        }
+
+        Wallet from = walletRepository.findById(fromId)
+                .orElseThrow(() -> new IllegalArgumentException("Conta origem não encontrada"));
+        Wallet to = walletRepository.findById(toId)
+                .orElseThrow(() -> new IllegalArgumentException("Conta destino não encontrada"));
+
+        if (from.getBalance().compareTo(amount) < 0) {
+            throw new IllegalArgumentException("Saldo insuficiente");
+        }
+
+        from.setBalance(from.getBalance().subtract(amount));
+        to.setBalance(to.getBalance().add(amount));
+
+        walletRepository.save(from);
+        walletRepository.save(to);
+    }
     
     public List<Wallet> getAllWallets() {
         return walletRepository.findAll();

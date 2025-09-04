@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wallet.dto.TransferRequestDTO;
 import com.example.wallet.model.Wallet;
 import com.example.wallet.service.WalletService;
 
@@ -42,6 +44,14 @@ public class WalletController {
     @PostMapping("/{id}/withdraw")
     public Wallet withdraw(@PathVariable UUID id, @RequestParam BigDecimal amount) {
         return walletService.withdraw(id, amount);
+    }
+    
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transfer(@RequestBody TransferRequestDTO request) {
+        walletService.transfer(request.getFromWalletId(),
+                               request.getToWalletId(),
+                               request.getAmount());
+        return ResponseEntity.ok("Transferência realizada com sucesso");
     }
     
     @GetMapping
