@@ -1,31 +1,35 @@
 # Wallet Service
 
-Este é um projeto **Spring Boot** que implementa um serviço simples de carteira digital.
+This is a **Spring Boot** project that implements a simple digital wallet service.
 
-## Requisitos
+## Requirements
 
 - Java 21+
 - Maven 3.8+
 
-## Rodando a aplicação
+## Running the application
 
 ```bash
 mvn spring-boot:run
 ```
 
-A aplicação ficará disponível em: [http://localhost:8080]
+The application will be available at: [http://localhost:8080]
 
-## Endpoints principais
+## Main endpoints
 
-- `GET /wallets` → lista todas as carteiras
-- `POST /wallets` → cria uma nova carteira
+- `GET /wallets` lista todas as carteiras -> list all wallets
+- `POST /wallets` cria uma nova carteira -> create a new wallet
 - `POST /wallets/{id}/withdraw` Saque
 - `POST /wallets/{id}/deposit` Deposito
 - `POST /wallets/{id}/balance` Saldo
-- `POST /wallets/transfer` → transfere saldo entre carteiras
+- `POST /wallets/transfer` transfere saldo entre carteiras -> transfer balance between wallets
 
-## Rodando os testes
+## Running the tests
 
 ```bash
 mvn test
 ```
+
+### Springdoc OpenAPI
+
+- `http://localhost:8080/swagger-ui.html`
